@@ -29,6 +29,11 @@
       title="강남고도미술학원 실제 홈페이지"
       src="http://www.godoart.com/default/index.php"
     ></iframe>
-    <script src="../dist/godo-chatbot.js?v=20260516-v2" defer></script>
+    <script>
+      const script = document.createElement('script');
+      script.defer = true;
+      script.src = `${location.hostname.endsWith('github.io') ? '../godo-chatbot.js' : '../dist/godo-chatbot.js'}?v=20260516-v2`;
+      document.body.appendChild(script);
+    </script>
   </body>
 </html>

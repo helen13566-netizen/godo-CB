@@ -20,6 +20,9 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: cp data/chips.json dist/chips.json
+      - run: cp index.html dist/index.html
+      - run: mkdir -p dist/demo
+      - run: cp demo/*.html dist/demo/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

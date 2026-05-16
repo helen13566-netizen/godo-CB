@@ -47,6 +47,11 @@
       <h1>미대입시<br />합격신화</h1>
       <p>강남고도미술학원 홈페이지 우하단 위젯 임베드 검수용 데모 페이지입니다.</p>
     </main>
-    <script src="../dist/godo-chatbot.js?v=20260516-v2" defer></script>
+    <script>
+      const script = document.createElement('script');
+      script.defer = true;
+      script.src = `${location.hostname.endsWith('github.io') ? '../godo-chatbot.js' : '../dist/godo-chatbot.js'}?v=20260516-v2`;
+      document.body.appendChild(script);
+    </script>
   </body>
 </html>
