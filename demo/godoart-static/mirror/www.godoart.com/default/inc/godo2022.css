@@ -40,7 +40,7 @@ body.g00 .sectionHeader{ background-size: cover}
 .nav>ul>li>a{font-size:18px}.nav>ul>li>ul a{font-size:16px}
 }
 
- sourceMappingURL=godo2022.css.map */ e20 */
+/* e20 */
 .phtoListWrap a{ display: block; padding: 30px 30px 30px 320px; margin: 6px 0; height:138px ; float: left; border: solid 1px #ededed; background: #fff; position: relative; }
 .phtoListWrap a:hover,
 .phtoListWrap a:focus { border:#00a4cb solid 1px }
@@ -183,5 +183,3 @@ td.view_cell_btn { height:auto; padding-bottom: 60px }
 
 
 }
-
-/*# sourceMappingURL=godo2022.css.map */
