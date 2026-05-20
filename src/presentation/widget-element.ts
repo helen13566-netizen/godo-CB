@@ -2,7 +2,7 @@ import { handleChipAction } from '../business/action-handler';
 import { ChipRouter } from '../business/chip-router';
 import { StateMachine } from '../business/state-machine';
 import type { Chip } from '../data/types';
-import { CALENDAR_ICON, CHATBOT_AVATAR, CLOSE_ICON, PHONE_ICON } from './icons';
+import { CALENDAR_ICON, CHATBOT_AVATAR, PHONE_ICON } from './icons';
 import type { GodoPanelElement, PanelTurn } from './panel-element';
 import { FONT_CSS } from './styles/tokens.css';
 import { WIDGET_STYLES } from './styles/widget.css';
@@ -18,7 +18,6 @@ export class GodoWidgetElement extends HTMLElement {
   private consultChip: Chip | null = null;
   private callChip: Chip | null = null;
   private turns: PanelTurn[] = [{ type: 'greeting' }];
-  private notificationOpen = true;
   private pendingAnswerTimer: number | null = null;
 
   connectedCallback() {
@@ -46,7 +45,6 @@ export class GodoWidgetElement extends HTMLElement {
     this.syncHostLayout(isOpen);
     this.root.innerHTML = `
       <style>${FONT_CSS}${WIDGET_STYLES}</style>
-      ${!isOpen && this.notificationOpen ? this.renderNotification() : ''}
       ${!isOpen ? this.renderTrigger() : ''}
       ${isOpen ? '<div class="panel-wrap"><godo-panel></godo-panel></div>' : ''}
     `;
@@ -54,12 +52,6 @@ export class GodoWidgetElement extends HTMLElement {
     this.root.querySelector('.chat')?.addEventListener('click', () => this.openPanel());
     this.root.querySelector('.consult')?.addEventListener('click', () => this.runAction('consult'));
     this.root.querySelector('.phone')?.addEventListener('click', () => this.runAction('call'));
-    this.root.querySelector('.nb-row')?.addEventListener('click', () => this.openPanel());
-    this.root.querySelector('.nb-close')?.addEventListener('click', (event) => {
-      event.stopPropagation();
-      this.notificationOpen = false;
-      this.render();
-    });
 
     const panel = this.root.querySelector<GodoPanelElement>('godo-panel');
     if (panel) {
@@ -79,37 +71,23 @@ export class GodoWidgetElement extends HTMLElement {
   private renderTrigger(): string {
     return `
       <div class="trigger" aria-label="고도 챗봇 빠른 메뉴">
-        <button class="trigger-item chat" type="button" aria-label="챗봇 열기">
+        <button class="trigger-item chat" type="button" aria-label="AI 챗봇 열기">
           <span class="trigger-icon">${CHATBOT_AVATAR}</span>
+          <span class="trigger-label">AI챗봇</span>
         </button>
         <button class="trigger-item consult" type="button" aria-label="상담 예약">
           <span class="trigger-icon">${CALENDAR_ICON}</span>
+          <span class="trigger-label">상담예약</span>
         </button>
         <button class="trigger-item phone" type="button" aria-label="전화 연결">
           <span class="trigger-icon">${PHONE_ICON}</span>
+          <span class="trigger-label">전화연결</span>
         </button>
-      </div>
-    `;
-  }
-
-  private renderNotification(): string {
-    return `
-      <div class="notification" role="status">
-        <button class="nb-close" type="button" aria-label="알림 닫기">${CLOSE_ICON}</button>
-        <div class="nb-row">
-          <span class="nb-content">
-            <span class="nb-msg">
-              <span class="nb-msg-main"><strong>미대입시</strong> 궁금하신가요?</span>
-            </span>
-          </span>
-        </div>
-        <span class="nb-tail"></span>
       </div>
     `;
   }
 
   private openPanel() {
-    this.notificationOpen = false;
     this.state.transition({ type: 'CLICK_CHATBOT_COMPONENT' });
     this.render();
   }
