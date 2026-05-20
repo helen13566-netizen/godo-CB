@@ -8,7 +8,7 @@ export const WIDGET_STYLES = `
 .trigger-item:hover { background: ${BRAND.primarySoft}; }
 .trigger-item:active { transform: scale(0.96); }
 .trigger-item:focus-visible { outline: 3px solid ${BRAND.primarySoft}; outline-offset: 2px; }
-.trigger-item.chat::before { content: ''; position: absolute; top: 6px; left: 50%; width: 36px; height: 36px; transform: translateX(-50%); border-radius: 50%; background: rgba(255,214,94,0.34); box-shadow: 0 0 0 2px rgba(255,214,94,0.72), 0 0 16px 5px rgba(245,158,11,0.72), 0 0 30px 9px rgba(255,229,128,0.5); opacity: 0.98; pointer-events: none; animation: avatarGlowPulse 0.95s ease-in-out infinite alternate; }
+.trigger-item.chat::before { content: ''; position: absolute; top: 6px; left: calc(50% - 18px); width: 36px; height: 36px; border-radius: 50%; background: rgba(255,214,94,0.34); box-shadow: 0 0 0 2px rgba(255,214,94,0.72), 0 0 16px 5px rgba(245,158,11,0.72), 0 0 30px 9px rgba(255,229,128,0.5); opacity: 0.98; pointer-events: none; animation: avatarGlowPulse 0.95s ease-in-out infinite alternate; }
 .trigger-item.chat:hover { background: transparent; }
 .trigger-icon { height: 36px; display: flex; align-items: center; justify-content: center; }
 .trigger-item.chat .trigger-icon { width: 36px; height: 36px; border-radius: 50%; overflow: hidden; }
@@ -29,7 +29,7 @@ export const WIDGET_STYLES = `
   :host([data-open]) { inset: 0 auto auto 0; width: 100vw; height: 100vh; }
   .trigger { width: 60px; gap: 0; padding: 0; transform: none; transform-origin: bottom right; border-radius: 26px; }
   .trigger-item { width: 60px; height: 60px; padding: 5px 0 6px; gap: 2px; }
-  .trigger-item.chat::before { top: 5px; width: 34px; height: 34px; }
+  .trigger-item.chat::before { top: 5px; left: calc(50% - 17px); width: 34px; height: 34px; }
   .trigger-icon { height: 32px; }
   .trigger-item.chat .trigger-icon { width: 34px; height: 34px; }
   .trigger-icon svg { width: 24px; height: 24px; }
